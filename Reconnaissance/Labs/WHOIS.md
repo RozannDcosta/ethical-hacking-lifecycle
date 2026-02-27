@@ -1,30 +1,81 @@
 # WHOIS Lookup – Public Domain Information Gathering
 
 ## Objective
-The objective of this lab is to perform passive reconnaissance by gathering publicly available domain registration details using WHOIS lookup.
+To perform passive reconnaissance by gathering publicly available domain registration details using WHOIS lookup, and to understand what information an attacker or security professional can extract before any direct interaction with a target system.
+
+---
 
 ## Tools Used
-- WHOIS Web Service (whois.com)
+- `whois` (Kali Linux CLI)
+- WHOIS Web Service (whois.com) — used for cross-verification
+
+---
 
 ## Lab Environment
 - Operating System: Kali Linux
-- Target Domain: example.com (public test domain)
+- Target Domain: `example.com` (public test domain)
+
+---
 
 ## Steps Performed
-1. Opened a web browser in Kali Linux.
-2. Navigated to a WHOIS lookup service.
-3. Entered the target domain (example.com).
-4. Reviewed the output, including domain registration date, expiration date, and name server information.
+
+1. Opened the terminal in Kali Linux.
+2. Ran the following command to perform a WHOIS lookup via CLI:
+   ```bash
+   whois example.com
+   ```
+<img width="675" height="282" alt="image" src="https://github.com/user-attachments/assets/4e518f05-c2bd-4ad6-981c-eeacd66f9807" />
+
+   
+3. Cross-verified results using the web-based WHOIS service at [whois.com](https://www.whois.com).
+<img width="802" height="557" alt="image" src="https://github.com/user-attachments/assets/3858766f-e5f2-4742-9bcd-6156e45b5b6a" />
+
+4. Reviewed the full output including registration dates, registrant details, nameserver information, and registrar data.
+
+---
+
+## Commands Used
+
+```bash
+whois example.com
+```
+
+---
 
 ## Observations
-The WHOIS lookup revealed that example.com was registered on 1995-08-14 and is set to expire on 2026-01-16.  
-The domain uses Cloudflare name servers (elliott.ns.cloudflare.com and hera.ns.cloudflare.com), indicating that DNS management and traffic protection are handled through Cloudflare services.
 
-## Learning Outcome
-This exercise demonstrated how WHOIS data can reveal important information such as domain age, expiration timeline, and infrastructure details like DNS providers. Understanding this data helps security professionals assess a domain’s exposure and digital footprint.
+The WHOIS lookup revealed the following key details about `example.com`:
+
+- **Registration Date:** 1995-08-14 — one of the oldest registered domains, indicating a well-established entity
+- **Expiration Date:** 2026-01-16 — a domain nearing expiration can be a target for domain hijacking attempts
+- **Nameservers:** `elliott.ns.cloudflare.com` and `hera.ns.cloudflare.com`
+
+The use of Cloudflare nameservers is a significant finding. It indicates that DNS management and traffic routing are handled through Cloudflare's infrastructure, meaning the real origin IP of the web server is likely masked behind Cloudflare's proxy. From an attacker's perspective, this means direct IP-based attacks would hit Cloudflare's network rather than the actual target server — making origin IP discovery a necessary next step in a real engagement.
+
+---
 
 ## Security Relevance
-Public WHOIS information can be leveraged by attackers to identify hosting providers, infrastructure patterns, and domain lifecycle details. Organizations should monitor their public domain records and use privacy protection services when appropriate to reduce unnecessary exposure.
+
+WHOIS data is entirely public and requires no special access to retrieve, making it a first-stop resource for both attackers and defenders.
+
+Key risks exposed by WHOIS data:
+
+- **Hosting provider / DNS provider identification** — reveals infrastructure stack (e.g., Cloudflare usage)
+- **Domain expiration dates** — expired or soon-to-expire domains are targets for domain hijacking
+- **Registrant contact details** — when privacy protection is not enabled, names, emails, and phone numbers are exposed, enabling social engineering attacks
+- **Registrar information** — can be used to craft convincing phishing emails impersonating the registrar
+
+Organizations should use **WHOIS privacy protection** services to mask registrant details, and should actively monitor domain expiration dates to prevent hijacking.
+
+---
+
+## Learning Outcome
+
+This lab demonstrated that before touching a single packet on a target network, a significant amount of infrastructure intelligence can be gathered passively through WHOIS. In a real penetration testing engagement, this data feeds directly into the next steps — DNS interrogation, infrastructure mapping, and social engineering recon.
+
+Key takeaway: the nameserver discovery (Cloudflare) immediately tells a tester that standard IP-based scanning won't reach the origin server. The next step in a real engagement would be to attempt origin IP discovery through techniques like checking historical DNS records, SSL certificate transparency logs, or email header analysis.
+
+---
 
 ## Disclaimer
-This lab was performed solely on a public test domain (example.com) for educational purposes. No unauthorized systems were accessed.
+This lab was performed solely on a public test domain (`example.com`) for educational purposes as part of CEH (Certified Ethical Hacker) training. No unauthorized systems were accessed. All information gathered is publicly available.
