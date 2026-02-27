@@ -69,13 +69,6 @@ Organizations should use **WHOIS privacy protection** services to mask registran
 
 ---
 
-## Learning Outcome
-
-This lab demonstrated that before touching a single packet on a target network, a significant amount of infrastructure intelligence can be gathered passively through WHOIS. In a real penetration testing engagement, this data feeds directly into the next steps — DNS interrogation, infrastructure mapping, and social engineering recon.
-
-Key takeaway: the nameserver discovery (Cloudflare) immediately tells a tester that standard IP-based scanning won't reach the origin server. The next step in a real engagement would be to attempt origin IP discovery through techniques like checking historical DNS records, SSL certificate transparency logs, or email header analysis.
-
----
 
 ## Disclaimer
 This lab was performed solely on a public test domain (`example.com`) for educational purposes as part of CEH (Certified Ethical Hacker) training. No unauthorized systems were accessed. All information gathered is publicly available.
