@@ -1,9 +1,18 @@
+# nslookup – DNS Reconnaissance and Record Enumeration
+
 ## Objective  
 To performed passive reconnaissance using nslookup to gather IP addresses and DNS records for a target domain.
+## Tools Used
+- `nslookup` (Kali Linux CLI)
+- `dig` (Kali Linux CLI)
+---
 
-## Background  
-In this exercise, I used nslookup to gather publicly available DNS information. 
+## Lab Environment
+- Operating System: Kali Linux
+- - Target Domain: `example.com` (public test domain)
 
+---
+  
 ## Steps Performed  
 1. I ran 'nslookup example.com' to retrieve the domain’s IPv4 addresses. 
 <img width="230" height="187" alt="image" src="https://github.com/user-attachments/assets/af4762bd-20eb-417c-90e9-ac6ba42a31f6" />
@@ -17,6 +26,7 @@ In this exercise, I used nslookup to gather publicly available DNS information.
 4. After that, I ran 'nslookup -type=any example.com' to gather all types of DNS records.
 <img width="685" height="660" alt="image" src="https://github.com/user-attachments/assets/42f44d57-bea9-4a1f-9ce9-3762382f3b9c" />
 
+---
 
 ## Commands Used  
 - `nslookup example.com`: Retrieves the domain’s A (IPv4) record.  
@@ -24,5 +34,27 @@ In this exercise, I used nslookup to gather publicly available DNS information.
 - `dig <IP>`: Used to validate the reverse lookup and cross-check IP-to-domain mapping.
 - `nslookup -type=any example.com`: Retrieves all DNS record types.  
 
-## Findings  
-The domain resolved to multiple IP addresses, both IPv4 and IPv6. However, during the reverse lookup, no domain was associated with the IP (NXDOMAIN). Used dig to reaffirmed that the IP did not map back to a domain name. By using the '-type=any' command, I gathered all DNS records, including A, AAAA, MX, SOA, DS, and DNSKEY, which gave me a full view of the domain’s infrastructure
+---
+
+## Observations 
+The domain resolved to multiple IP addresses, both IPv4 and IPv6. However, during the reverse lookup, no domain was associated with the IP (NXDOMAIN) (This is consistent with Cloudflare-proxied infrastructure, where reverse DNS is deliberately not configured to prevent origin server discovery.). Used dig to reaffirmed that the IP did not map back to a domain name. By using the '-type=any' command, I gathered all DNS records, including A, AAAA, MX, SOA, DS, and DNSKEY, which gave me a full view of the domain’s infrastructure
+
+---
+
+## Security Relevance
+
+DNS records are publicly accessible and reveal significant details about a target's infrastructure without any direct interaction with their systems.
+
+Key risks exposed through DNS enumeration:
+- **A/AAAA records** — expose the IP addresses hosting the domain, giving attackers a direct target for scanning and exploitation
+- **MX records** — reveal the mail server infrastructure, which can be targeted for email spoofing, phishing, or mail server exploitation
+- **SOA records** — expose the primary nameserver and the domain administrator's contact, useful for social engineering attacks
+- **DNSKEY/DS records** — presence of DNSSEC indicates the domain has added a layer of DNS integrity protection, which is useful for defenders to note
+- **NXDOMAIN on reverse lookup** — indicates the target is likely behind a CDN or cloud proxy (like Cloudflare), meaning the real origin server IP is deliberately hidden
+
+Organizations should regularly audit their own DNS records to ensure no unintended information is exposed, restrict zone transfers to authorized servers only, and implement DNSSEC to protect against DNS spoofing and cache poisoning attacks.
+
+---
+
+## Disclaimer
+This lab was performed solely on a public test domain (`example.com`) for educational purposes as part of CEH (Certified Ethical Hacker) training. No unauthorized systems were accessed. All information gathered is publicly available.
