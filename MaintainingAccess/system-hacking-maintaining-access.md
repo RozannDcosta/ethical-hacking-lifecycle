@@ -6,7 +6,7 @@
 
 ---
 
-# Lab 01 – System Hacking: Maintaining Access
+# System Hacking: Maintaining Access
 
 ## Objective
 To establish persistent access to the compromised Metasploitable2 target by creating a hidden backdoor user account with full sudo privileges — demonstrating how an attacker maintains access independently of the original exploit vector, surviving reboots and service restarts.
