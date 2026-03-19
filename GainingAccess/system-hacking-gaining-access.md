@@ -1,6 +1,6 @@
 > **Note:** This lab is Part 1 of a 3-part series following the same target and session across the ethical hacking lifecycle. The session established here continues in:
-> - Phase 4 – [`system-hacking-maintaining-access.md`](../Maintaining-access/system-hacking-maintaining-access.md)
-> - Phase 5 – [`system-hacking-clearing-tracks.md`](../Covering-tracks/system-hacking-clearing-tracks.md)
+> - Phase 4 – [`system-hacking-maintaining-access.md`](../MaintainingAccess/system-hacking-maintaining-access.md)
+> - Phase 5 – [`system-hacking-clearing-tracks.md`](../CoveringTracks/system-hacking-clearing-tracks.md)
 
 ---
 
