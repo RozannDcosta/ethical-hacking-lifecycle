@@ -1,5 +1,5 @@
 **Note:** This lab is Part 3 of 3 Continues from the persistent access established in 
-> - Phase 5 – [`system-hacking-maintaining-access.md`](../MaintainingAccess/system-hacking-maintaining-access.md)
+> - Phase 4 – [`system-hacking-maintaining-access.md`](../MaintainingAccess/system-hacking-maintaining-access.md)
 ---
 
 System Hacking: Clearing Tracks
