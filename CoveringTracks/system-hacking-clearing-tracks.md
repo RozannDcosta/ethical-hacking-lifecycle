@@ -51,7 +51,7 @@ history -c
 cat /dev/null > ~/.bash_history
 ```
 
-<img width="700" height="400" alt="history -c and cat /dev/null to bash_history commands executed in root shell" src="YOUR_SCREENSHOT_URL" />
+<img width="191" height="25" alt="image" src="https://github.com/user-attachments/assets/9bfba59f-d351-45b9-9d64-4ffd409f195c" />
 
 **Result:** In-memory history flushed with `history -c`. On-disk history file `/root/.bash_history` overwritten with zero bytes via `/dev/null` redirect.
 
@@ -66,7 +66,7 @@ cat /dev/null > /var/log/auth.log
 cat /dev/null > /var/log/syslog
 ```
 
-<img width="700" height="400" alt="cat /dev/null redirected to auth.log and syslog zeroing both files" src="YOUR_SCREENSHOT_URL" />
+<img width="182" height="21" alt="image" src="https://github.com/user-attachments/assets/a5b4936a-9e74-459e-b4fc-28237ab8c099" />
 
 **Result:** Both `/var/log/auth.log` and `/var/log/syslog` reduced to 0 bytes. FTP authentication events, shell spawn records, and session activity removed.
 
@@ -81,7 +81,7 @@ echo "" > /var/log/wtmp
 echo "" > /var/log/btmp
 ```
 
-<img width="700" height="400" alt="echo empty string redirected to wtmp and btmp zeroing both binary login record files" src="YOUR_SCREENSHOT_URL" />
+<img width="256" height="25" alt="image" src="https://github.com/user-attachments/assets/d7853194-8fa5-453f-887c-6560bbdf40ff" />
 
 **Result:** `wtmp` and `btmp` both reduced to 1 byte (newline). The `last` and `lastb` commands will no longer return historical login records from the attack window.
 
@@ -95,7 +95,7 @@ The `/var/log/` directory was listed to confirm which files were successfully ze
 ls -la /var/log/
 ```
 
-<img width="700" height="400" alt="ls -la /var/log showing auth.log syslog wtmp and btmp all at 0 or 1 bytes after clearing" src="YOUR_SCREENSHOT_URL" />
+<img width="536" height="450" alt="image" src="https://github.com/user-attachments/assets/7c4e2f3f-b797-4721-ac39-ff70e2001806" />
 
 **Result:** Confirmed:
 
